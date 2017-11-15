@@ -1,0 +1,219 @@
+a,
+a:active,
+a:hover,
+a:link,
+a:visited {
+outline: 0;
+text-decoration: none;
+cursor: pointer;
+}
+body{
+    margin: 0 auto;
+    padding: 0 auto;
+    font-family: Arial;
+    background:#f2f4f5;
+}
+.title{
+    width:97%;
+    padding:10px 10px 
+    height:auto;
+    color:#275b2f;
+    font-size:18px;
+    font-family: Arial;
+    border-bottom: 2px solid #275b2f;
+    float:left;
+    margin:10px;
+}
+.subtitle{
+    width:97%;
+    padding:10px 10px 
+    height:auto;
+    color:#275b2f;
+    font-size:14px;
+    font-family: Arial;
+    border-bottom: 2px solid #275b2f;
+    float:left;
+    margin:10px;   
+}
+header{
+    margin:0 auto;
+    padding:0 auto;
+    width:100%;
+    height:90px;
+}
+.logo{
+    width:10%;
+    height: auto;
+    float:left;
+    text-align: center;
+    margin-top:10px;
+}
+.search {
+    margin:0 auto;
+    padding:0 auto;
+    width: 60%;
+    height: 90px;
+    float:left;
+ 
+}
+.search input{
+    width:80%;
+    float:left;
+    height: 35px;
+    margin-top:25px;
+}
+
+.user{
+    width:10%;
+    float:left; 
+    margin-top:30px;
+    text-align: center;
+}
+
+.banner{
+    padding:10px 10px;
+    width:100%;
+    height:420px;
+    background: #f4f5f6;
+    float:left;
+}
+.bannerSec{
+    padding:10px 10px;
+    width:100%;
+    height:250px;
+    background: #ccc;
+    float:left;
+}
+.anuncios{
+    padding-left:10px; 
+    width:100%;
+    height:450px;
+    background: #f4f5f6;
+    float:left;
+    display:table;
+}
+.destaque{
+    margin:1px 1px;
+    width: 24.7%;
+    height:400px;
+    background: #fff;
+    float:left; 
+}
+.destaque:hover{
+    border:2px solid #ddd;
+}
+.load{
+    margin: 0 auto;
+    padding: 0 auto;
+    width:100%;
+    height:auto;
+    text-align: center;
+    float:left;
+}
+.social{
+    width:101%;
+    height: 300px;
+    border-top:5px solid #ccc;
+    background-color: #fff;
+    float:left;
+}
+.face{
+    
+}
+footer{
+    color:#fff;
+    padding:10px;
+    width:100%;
+    height:50px;
+    background-color: #275b2f;
+    float:left;
+}
+.envelope{
+    margin:0 auto;
+    padding:0 auto;
+    width:100%;
+    height: auto;
+
+}
+.btn{
+    position:absolute;
+    height: 35px;
+    background: #275b2f;
+    margin-top:25px;
+    color:#fff;
+}
+
+
+/*
+        
+        [[[[[Galeria de imagem Anuncio]]]]]
+
+*/
+/* example_6 css */  
+#example_6 {  
+    position: relative; /* important */  
+    overflow: hidden; /* important */  
+    width: 640px; /* important */  
+    height: 540px; /* important */  
+    margin: 0;  
+    background: #fff;  
+}  
+  
+#example_6_content {  
+    position: absolute;  
+    top: 0;  
+    margin-left: 0;  
+}  
+  
+#example_6_content  
+#example_6_content li {  
+    list-style: none;  
+    margin: 0;  
+    padding: 0;  
+}  
+    #example_6_content {  
+        width: 13440px;  
+    }  
+    #container_bd #example_6 ul li {  
+        display: block;  
+        float: left;  
+        margin: 0;  
+        padding: 0;  
+        border: none;  
+        background-color: #fff;  
+    }  
+  
+#container_bd #example_6 ul li img {  
+    display: block;  
+}  
+  
+#example_6_frame {  
+    position: relative;  
+    margin: 485px 131px 0 131px;  
+}  
+#container_bd #example_6_frame ul li {  
+    margin: 0 2px;  
+}  
+#container_bd #example_6_frame ul li img{  
+    border: 1px solid #9cf;  
+    padding: 2px;  
+}  
+    #container_bd #example_6_frame ul li img:hover {border: 1px solid #369;}  
+    
+/*FIM GALERIA IMAGEM ANUNCIO*/
+#feed{
+    width:150px;
+    height:50px;
+    background:url(../images/feedback_btn.png);
+    position:fixed;right:-70px;
+    background-size:150px 30px;
+    background-repeat: no-repeat;
+    z-index:999999999;top:40%;
+    cursor:pointer;
+    -webkit-transform:rotate(-90deg); 
+    -moz-transform:rotate(-90deg); 
+    -o-transform:rotate(-90deg);
+    transform:rotate(-90deg);
+}
+
+
