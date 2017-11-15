@@ -3,4 +3,3 @@ if(!isset($_SESSION["LOGIN_USUARIO"])){ //os nomes da sessao no caso to mostrand
 header("Location:../index.php?erro=3");
  //aki o cara vai pra index.php se nao tiver logado  
 }
-?>

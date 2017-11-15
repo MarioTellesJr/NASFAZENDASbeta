@@ -381,10 +381,10 @@ function uploadFoto(){
         if(isset($_POST["submit"])) {
             $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
             if($check !== false) {
-                echo "O arquivo é uma imagem - " . $check["mime"] . ".";
+                //echo "O arquivo é uma imagem - " . $check["mime"] . ".";
                 $uploadOk = 1;
             } else {
-                echo "O arquivo não é uma imagem.";
+                //echo "O arquivo não é uma imagem.";
                 $uploadOk = 0;
             }
         }
@@ -410,7 +410,7 @@ function uploadFoto(){
         // if everything is ok, try to upload file
         } else {
             if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-                echo "A imagen". basename( $_FILES["fileToUpload"]["name"]). " foi carregado.";
+                //echo "A imagen". basename( $_FILES["fileToUpload"]["name"]). " foi carregado.";
                 
                 $pegaId = mysql_query("SELECT usu_id from usuario WHERE usu_id = '$id'")or die(mysql_error());
                 $mostrarFis = mysql_fetch_assoc($pegaId);

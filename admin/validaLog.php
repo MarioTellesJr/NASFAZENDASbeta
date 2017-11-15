@@ -27,9 +27,8 @@
 */
 		
 		$gravalog= htmlspecialchars(trim($_POST["usuario"]));//salva na variavel $gravaLog o login do adm
-		$gravaSenha= htmlspecialchars(trim($_POST["senha"]));//salva na variavel $gravaSenhaADM a senha do admim
-		echo $gravaSenha;
-		$gravaSenha2=md5($gravaSenha);//criptografa a senha
+		$gravaSenha= htmlspecialchars(trim($_POST["senha"]));//salva na variavel $gravaSenhaADM a senha do admim	
+		$gravaSenha2=$gravaSenha;//criptografa a senha
 		if($gravalog && $gravaSenha != ""){
 			$sql = mysql_query("SELECT * FROM usuario WHERE usu_email='$gravalog'");//seleciona o banco dados loginfum nome logADM
 			$cont = mysql_num_rows($sql);//cont recebe a a linha selecionada
@@ -60,10 +59,9 @@
 													SET acesso = '$access' 
 													WHERE idusuarios = '$id' ")or die(mysql_error());*/
 							header("location:home.php");			
-							session_destroy();
+							
 						}
 							
 				}
 		}
 		
-?>

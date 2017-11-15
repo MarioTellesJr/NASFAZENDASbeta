@@ -76,7 +76,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html" style="color:#fff;">Minha Conta <?php if($id == $idJur ){echo $nomeJur;} else{ echo $nomePF;} ?> </a>
+                <a class="navbar-brand" href="index.php" style="color:#fff;">Minha Conta <?php if($id == $idJur ){echo $nomeJur;} else{ echo $nomePF;} ?> </a>
             </div>
             <!-- /.navbar-header -->
 
