@@ -20,6 +20,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
+     <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
     <title>NAS FAZENDAS PAINEL</title>
 
@@ -341,11 +346,9 @@
                         <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
                         </a>
                         <a href="#" data-toggle="modal" data-target=".bd-info-modal-lg<?php echo $id;?>" title="Mais Informações">
-                        </a>
-                        <a href="home.php?go=info&id=<?php echo $id; ?>" data-toggle="modal" title="Mais Informações">
                         <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
                         </a>
-                        <a href="home.php?go=email&id=<?php echo $id; ?>" data-toggle="modal" title="Enviar Email">
+                        <a href="#" data-toggle="modal" data-target=".bd-email-modal-lg<?php echo $id;?>" title="Enviar Email">
                         <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
                         </a>
                     </th>
@@ -830,12 +833,24 @@ if ($idPessoaJ == $id) { ?>
 
     <?php
 }
-?>   
-            
-           
+?>    
         </div>
       </div>
     </div><!-- FIM MODAL Editar -->
+                <!-- inicio modal enviar email-->
+                <div class="modal fade bd-email-modal-lg<?php if($id==$id)echo $id;?>">
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Modal Header</h4>
+                      </div>
+                      <div class="modal-body">
+                        <p>Some text in the modal.</p>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                      </div>
+                    </div>
+                    <!--fim modal enviar email-->
 
     <!-- jQuery -->
     <script src="../vendor/jquery/jquery.min.js"></script>

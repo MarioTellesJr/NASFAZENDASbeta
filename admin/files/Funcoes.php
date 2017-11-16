@@ -56,7 +56,7 @@ function cadastraUsuarioCpf() {
     $pessoaFisica_cpf = htmlspecialchars(trim($_POST['cpf']));
     //$pessoaJur_cnpj = htmlspecialchars(trim($_POST['cnpj']));
     //$pessoa_jur_nomeFantasia = htmlspecialchars(trim($_POST['fantasia']));
-    $usu_senha = htmlspecialchars(trim(md5($_POST['senha'])));
+    $usu_senha = htmlspecialchars(trim($_POST['senha']));
     $usu_cep = htmlspecialchars(trim($_POST['cep']));
     $usu_endereco = htmlspecialchars(trim($_POST['rua']));
     $usu_numero = htmlspecialchars(trim($_POST['numero']));
@@ -119,7 +119,7 @@ function cadastraUsuarioCnpj() {
     //$pessoaFisica_cpf = htmlspecialchars(trim($_POST['cpf']));
     $pessoaJur_cnpj = htmlspecialchars(trim($_POST['cnpj']));
     $pessoaJur_nomeFantasia = htmlspecialchars(trim($_POST['fantasia']));
-    $usu_senha = htmlspecialchars(trim(md5($_POST['senha'])));
+    $usu_senha = htmlspecialchars(trim($_POST['senha']));
     $usu_cep = htmlspecialchars(trim($_POST['cep']));
     $usu_endereco = htmlspecialchars(trim($_POST['rua']));
     $usu_numero = htmlspecialchars(trim($_POST['numero']));
@@ -204,9 +204,9 @@ function alterar(){
     $cpf = htmlspecialchars(trim($_POST['cpf']));
     $cnpj = htmlspecialchars(trim($_POST['cnpj']));
     $fantasia = htmlspecialchars(trim($_POST['fantasia']));
-    $senha = htmlspecialchars(trim(md5($_POST['senha'])));
+    $senha = htmlspecialchars(trim($_POST['senha']));
     $cep = htmlspecialchars(trim($_POST['cep']));
-    $endereco = htmlspecialchars(trim($_POST['rua']));
+    $rua = htmlspecialchars(trim($_POST['rua']));
     $numero = htmlspecialchars(trim($_POST['numero']));
     $comp = htmlspecialchars(trim($_POST['complemento']));
     //$estado = htmlspecialchars(trim($_POST['estado']));
@@ -234,7 +234,7 @@ function alterar(){
                                                         usuario_usu_id = '$id'")or die(mysql_error());
 
                     $dadosEditadoEnd = mysql_query("UPDATE endereco SET 
-                                                        endereco_rua =  '$rua',
+                                                        endereco_rua = '$rua',
                                                         endereco_cep='$cep',
                                                         endereco_numero = '$numero',
                                                         endereco_comp = '$comp'

@@ -27,7 +27,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>NAS FAZENDAS</title>
+    <title>NAS FAZENDAS Editar Perfil</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -131,16 +131,7 @@
                                         </div>
                                     </form>
                                 
-                        <?php 
-                            $erro = $_GET['error'];
-                            switch ($erro) {
-                            case 0:
-                              echo "<div class='alert alert-success' style='position:absolute;width:40%;bottom:-100px;opacity:0.8;left:510px;' id='mydiv' role='alert'><center><span class='glyphicon glyphicon-ok' aria-hidden='true'> </span> Dados atualizados com sucesso!!!</center></div>";
-                              break;
-                            case 1:
-                              echo "<div class='alert alert-danger' style='position:absolute;width:40%;bottom:-100px;opacity:0.8;left:610px;' id='mydiv' role='alert'><center><span class='glyphicon glyphicon-remove' aria-hidden='true'> </span> <b>  Erro ao atualizar os dados!</b></center></div>";
-                            break;
-                        }?>
+                    
                             <h1 class="page-header">Informacões</h1>
                              <?php
 
@@ -339,6 +330,8 @@ if ($idPessoaJ == $id) { ?>
     <?php
 }
 ?>   
+
+
             
            
         </div>
