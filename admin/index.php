@@ -21,25 +21,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-  <script type="text/javascript">
-      $(document).ready(function() {
-        var movementStrength = 55;
-        var height = movementStrength / $(window).height();
-        var width = movementStrength / $(window).width();
-        $("#top-image").mousemove(function(e){
-                  var pageX = e.pageX - ($(window).width() / 2);
-                  var pageY = e.pageY - ($(window).height() / 2);
-                  var newvalueX = width * pageX * -1 - 25;
-                  var newvalueY = height * pageY * -1 - 50;
-                  $('#top-image').css("background-position", newvalueX+"px     "+newvalueY+"px");
-        });
-     });
-
-</script>
+  
 <script type="text/javascript">
    $(document).ready(function(){
     $("#pessoajuridicaform").hide(100);
@@ -59,10 +47,11 @@
 <div id="top-image"></div>
   <div class="container">
   
-      <p>
-        <center><img src="../images/logo.png" width="160" /></center>
-      </p>
+      
       <form class="form-signin" action="validaLog.php" method="post">
+        <p>
+        <center><img src="../images/logo.png" width="100" /></center>
+      </p>
       <?php
          if(isset($erro)){
           switch ($erro) {
@@ -93,24 +82,31 @@
         <h2 class="form-signin-heading"></h2>
         <div class="form-group">
           <div class="input-group">
-            <span class="input-group-addon">
-              <i class="glyphicon glyphicon-edit"></i>
-            </span>
-          <input name="usuario" type="text" id="inputEmail" class="form-control" placeholder="Usuário" required autofocus>
+            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+            <input name="usuario" type="text" id="inputEmail" class="form-control" placeholder="Usuário" style="height: 30px; font-size: 15px; padding: 5px;" required autofocus>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="input-group">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>           
+            <input name="senha" type="password" id="inputPassword" class="form-control" placeholder="Senha" style="height: 30px; font-size: 15px; padding: 5px;" required>
           </div>
         </div>
 
-        <div class="form-group">
-          <input name="senha" type="password" id="inputPassword" class="form-control" placeholder="Senha" required>
-        </div>
+         <button class="btn btn-large btn-primary" type="submit"  style="background-color: #006400; border-color: #006400; cursor:pointer; width: 100%; height: 30px; font-color: white; font-size: 15px; padding: 5px;">Entrar</button>
+        <input type="checkbox" checked="checked" style="font-color:black; color: black; font-size:10px; margin-left:5px"> Lembrar-me
         <div class="checkbox">
-          
           <label>
-            <a href="" data-toggle="modal" data-target=".bd-example-modal-lg">Cadastre-se</a>
+            <a href="" data-toggle="modal" data-target=".bd-example-modal-lg" style="color:black">Cadastre-se</a>
           </label>
           
         </div>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Entrar</button>
+
+
+        <div class="container" style="">
+          <span style="margin-left:-15px;color:black; font-size: 16px;" class="psw">Esqueceu a <a href="#">Senha?</a></span>
+        </div>
+       
       </form>
 
     </div> <!-- /container -->
