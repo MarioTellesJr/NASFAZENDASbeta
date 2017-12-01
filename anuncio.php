@@ -103,15 +103,19 @@
     <section id="magnific" style="width:80%;height:auto;margin:0 auto;padding: 0 auto;background:#fff;border:1px solid #ccc;margin-top:10px;">
     <div class="row">
       
-      <div class="large-6 column" >
-        <div class="xzoom-container">
+      <div class="large-6 column"  >
+        <div class="xzoom-container" >
           
           <img class="xzoom5" id="xzoom-magnific" src="admin/files/user_data/<?php echo $img ;?>" xoriginal="admin/files/user_data/<?php echo $img ;?>" />
           <div class="xzoom-thumbs">
-            <a href="admin/files/user_data/<?php echo $img ;?>"><img class="xzoom-gallery5" width="80" src="admin/files/user_data/<?php echo $img ;?>"  xpreview="admin/files/user_data/<?php echo $img ;?>" title="The description goes here"></a>
-            <a href="images/gallery/original/02_o_car.jpg"><img class="xzoom-gallery5" width="80" src="images/gallery/preview/02_o_car.jpg" title="The description goes here"></a>
-            <a href="images/gallery/original/03_r_car.jpg"><img class="xzoom-gallery5" width="80" src="images/gallery/preview/03_r_car.jpg" title="The description goes here"></a>
-            <a href="images/gallery/original/04_g_car.jpg"><img class="xzoom-gallery5" width="80" src="images/gallery/preview/04_g_car.jpg" title="The description goes here"></a>
+            <?php 
+              $imgMini = mysql_query("SELECT *FROM img_produto WHERE anuncio_anuncio_id = '$id' ")or die(mysql_error());
+              while($mostrar = mysql_fetch_array($imgMini)):
+                $imgThumb = $mostrar['img_nome'];
+            ?>
+            <a href="admin/files/user_data/<?php echo $imgThumb ;?>"><img class="xzoom-gallery5" width="80" src="admin/files/user_data/<?php echo $imgThumb ;?>"  xpreview="admin/files/user_data/<?php echo $imgThumb ;?>" title="The description goes here"></a>
+            <?php endwhile; ?>
+            
           </div>
         </div>    
         

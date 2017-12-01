@@ -494,7 +494,7 @@
                             <th > <?php echo $forma; ?> </th>
                             <th > <?php echo "Imagens ( " .$totalImg." )"; ?> </th>
                             <th style="text-align:center;">
-                                <a href="../files/editar.php?id=<?php echo $id; ?>" data-toggle="modal" title="Editar">
+                                <a href="../files/editarAnuncio.php?id=<?php echo $id; ?>" data-toggle="modal" title="Editar">
                                 <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
                                 </a>
                                 <a href="../files/deletar.php?id=<?php echo $id; ?>" data-toggle="modal" data-target=".bd-example-modal-lg" title="Excluir">

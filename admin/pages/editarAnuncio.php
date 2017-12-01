@@ -328,7 +328,7 @@
                                         
                                     ?>
                                     <div style="width:205px;height: 155px;border:2px solid #ccc;float:left;">
-                                        <a style="position:absolute;" href="../files/Funcoes.php?id=<?php echo $id ?>&idImg=<?php echo $idImg ?>&funcao=14" >[x]</a>
+                                        <a style="position:absolute;width:25px;height:25px;background-color: red;border-radius:100%;padding:2px 7px;color:#fff;" href="../files/Funcoes.php?id=<?php echo $id ?>&idImg=<?php echo $idImg ?>&funcao=14" title="Deletar" >X</a>
                                         <img src="../files/user_data/<?php echo $img ?>"  width="200" height="150" />
                                     </div>
                                     <?php } ?> 

@@ -64,18 +64,24 @@
     
     <div class="anuncios row-fluid">
       <div class="envelope">
-        <span class="title">Contato</span>
-        <form action="funcoes.php" method="post">
-          <label>Nome</label>
-          <input class="form-control" type="text" name="nome" >
-          <label>Email</label>
-          <input class="form-control" type="text" name="email" >
-          <label>Assunto</label>
-          <input class="form-control" type="text" name="assunto" >
-          <label>Mensagem</label><br>
-          <textarea class="form-control"></textarea>
-          <input type="submit" class="btn-success" name="Enviar" value="Enviar" >
-        </form>
+        <div class="maps" style="width:50%; float:right;padding:15px 15px;">
+          <span class="title">Endereço</span>
+        </div>
+          <div class="form-contato" style="width:50%; float:right;padding:15px 15px;">
+              <span class="title">Contato</span>
+              <form action="funcoes.php" method="post">
+                <label>Nome</label>
+                <input class="form-control" type="text" name="nome" >
+                <label>Email</label>
+                <input class="form-control" type="text" name="email" >
+                <label>Assunto</label>
+                <input class="form-control" type="text" name="assunto" >
+                <label>Mensagem</label><br>
+                <textarea class="form-control"></textarea>
+                <br>
+                <input type="submit" class="btn-success" name="Enviar" value="Enviar" >
+              </form>
+          </div>
       </div>
     <div class="row social">
           <div class="face col-md-4">

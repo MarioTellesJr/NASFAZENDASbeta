@@ -42,9 +42,14 @@ switch ($funcao) {
         uploadFoto();
         break;
     case 13:
-        recuperarSenha();
+        deletaAnuncio();
         break;
-    
+    case 14:
+        deletaImageAnuncio();
+        break;
+    case 20:
+        editarAnuncio();
+        break;
     default:
         # code...
         break;
@@ -59,7 +64,7 @@ function cadastraUsuarioCpf() {
     $pessoaFisica_cpf = htmlspecialchars(trim($_POST['cpf']));
     //$pessoaJur_cnpj = htmlspecialchars(trim($_POST['cnpj']));
     //$pessoa_jur_nomeFantasia = htmlspecialchars(trim($_POST['fantasia']));
-    $usu_senha = htmlspecialchars(trim($_POST['senha']));
+    $usu_senha = htmlspecialchars(trim(md5($_POST['senha'])));
     $usu_cep = htmlspecialchars(trim($_POST['cep']));
     $usu_endereco = htmlspecialchars(trim($_POST['rua']));
     $usu_numero = htmlspecialchars(trim($_POST['numero']));
@@ -122,7 +127,7 @@ function cadastraUsuarioCnpj() {
     //$pessoaFisica_cpf = htmlspecialchars(trim($_POST['cpf']));
     $pessoaJur_cnpj = htmlspecialchars(trim($_POST['cnpj']));
     $pessoaJur_nomeFantasia = htmlspecialchars(trim($_POST['fantasia']));
-    $usu_senha = htmlspecialchars(trim($_POST['senha']));
+    $usu_senha = htmlspecialchars(trim(md5($_POST['senha'])));
     $usu_cep = htmlspecialchars(trim($_POST['cep']));
     $usu_endereco = htmlspecialchars(trim($_POST['rua']));
     $usu_numero = htmlspecialchars(trim($_POST['numero']));
@@ -207,9 +212,9 @@ function alterar(){
     $cpf = htmlspecialchars(trim($_POST['cpf']));
     $cnpj = htmlspecialchars(trim($_POST['cnpj']));
     $fantasia = htmlspecialchars(trim($_POST['fantasia']));
-    $senha = htmlspecialchars(trim($_POST['senha']));
+    $senha = htmlspecialchars(trim(md5($_POST['senha'])));
     $cep = htmlspecialchars(trim($_POST['cep']));
-    $rua = htmlspecialchars(trim($_POST['rua']));
+    $endereco = htmlspecialchars(trim($_POST['rua']));
     $numero = htmlspecialchars(trim($_POST['numero']));
     $comp = htmlspecialchars(trim($_POST['complemento']));
     //$estado = htmlspecialchars(trim($_POST['estado']));
@@ -237,7 +242,7 @@ function alterar(){
                                                         usuario_usu_id = '$id'")or die(mysql_error());
 
                     $dadosEditadoEnd = mysql_query("UPDATE endereco SET 
-                                                        endereco_rua = '$rua',
+                                                        endereco_rua =  '$rua',
                                                         endereco_cep='$cep',
                                                         endereco_numero = '$numero',
                                                         endereco_comp = '$comp'
@@ -299,18 +304,23 @@ function editarCat(){
 
 
 function adicionarAnuncio(){
-        $idUser = $_POST['id']; 
+        $idUser = $_POST['id'];
+        $idAnuncio = $_POST['idAnuncio']; 
         $titulo = $_POST['titulo'];
         $descricao = $_POST['descricao'];
         $valor= $_POST['valor'];
         $data = date("Y-m-d");
-        $dataFinal = $data+10;
+        $estado = $_POST['estado'];
+        $cidade = $_POST['cidade'];
+        $dataFinal = date("Y-m-d", mktime (0,0,0,date("m"),date("d")+10,date("Y")));
         mysql_query("INSERT INTO anuncio(anuncio_titulo,
                                           anuncio_desc,
                                           anuncio_valor,
                                           anuncio_datainicial,
                                           anuncio_datafinal,
                                           anuncio_formPag,
+                                          anunio_estado,
+                                          anuncio_cidade,
                                           usuario_usu_id) 
                                       VALUES('$titulo',
                                              '$descricao',
@@ -318,6 +328,8 @@ function adicionarAnuncio(){
                                              '$data',
                                              '$dataFinal',
                                              'free',
+                                             '$estado',
+                                             '$cidade',
                                              '$idUser')")or die(mysql_error());
 	if(isset($_FILES['files'])){
         $errors= array();
@@ -384,10 +396,10 @@ function uploadFoto(){
         if(isset($_POST["submit"])) {
             $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
             if($check !== false) {
-                //echo "O arquivo é uma imagem - " . $check["mime"] . ".";
+                echo "O arquivo é uma imagem - " . $check["mime"] . ".";
                 $uploadOk = 1;
             } else {
-                //echo "O arquivo não é uma imagem.";
+                echo "O arquivo não é uma imagem.";
                 $uploadOk = 0;
             }
         }
@@ -413,7 +425,7 @@ function uploadFoto(){
         // if everything is ok, try to upload file
         } else {
             if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-                //echo "A imagen". basename( $_FILES["fileToUpload"]["name"]). " foi carregado.";
+                echo "A imagen". basename( $_FILES["fileToUpload"]["name"]). " foi carregado.";
                 
                 $pegaId = mysql_query("SELECT usu_id from usuario WHERE usu_id = '$id'")or die(mysql_error());
                 $mostrarFis = mysql_fetch_assoc($pegaId);
@@ -494,60 +506,123 @@ function alterarProfile(){
                             
                         }
 }	
-function recuperarSenha(){
-
-    date_default_timezone_set('America/Sao_Paulo');
-    require_once("../class/class.phpmailer.php");
-    $mail = new PHPMailer(true);
-    $mail->IsSMTP();
-
-
-
-    $email = $_POST['email'];
-
-    
-    $destinatario = $email;
-        
-    
-        
-    if ($email <> ""){
-        
-        $sql = mysql_query("SELECT usu_email, 
-                                   usu_senha 
-                            FROM usuario    
-                            WHERE usu_email ='$email'")or die(mysql_error());
-        $contador = mysql_num_rows($sql);
-        
-        
-        if ($contador == 1){
-        try { 
-                $mail->Host = 'smtp.nasfazendas.com.br'; // Endereço do servidor SMTP (Autenticação, utilize o host smtp.seudomínio.com.br)
-                $mail->SMTPAuth   = true;  // Usar autenticação SMTP (obrigatório para smtp.seudomínio.com.br)
-                $mail->Port       = 465; //  Usar 587 porta SMTP
-                $mail->Username = 'automatico@nasfazendas.com.br'; // Usuário do servidor SMTP (endereço de email)
-                $mail->Password = 'nasfazendas2017'; // Senha do servidor SMTP (senha do email usado)
-
-                $mail->SetFrom('automatico@nasfazendas.com.br', 'nasfazendas'); //Seu e-mail
-                $mail->AddReplyTo('automatico@nasfazendas.com.br', 'nasfazendas'); //Seu e-mail
-                $mail->Subject = 'Assunto';//Assunto do e-mail
-
-                $mail->AddAddress($email);
-
-                $mail->MsgHTML('corpo do email'); 
-                ////Caso queira colocar o conteudo de um arquivo utilize o método abaixo ao invés da mensagem no corpo do e-mail.
-                 //$mail->MsgHTML(file_get_contents('arquivo.html'));
-             
-                $mail->Send();
-                echo "Mensagem enviada com sucesso</p>\n";
-             
-                //caso apresente algum erro é apresentado abaixo com essa exceção.
-                }catch (phpmailerException $e) {
-                 echo $e->errorMessage(); //Mensagem de erro costumizada do PHPMailer
-            }
-
-        }
-        
+function deletaAnuncio(){
+    $exclui_idSub = $_GET['id'];
+    $idUser = $_GET['idUser'];
+   
+    $res2 = mysql_query("SELECT *FROM img_produto WHERE anuncio_anuncio_id = '$exclui_idSub' ")or die(mysql_error());
+    while ($show = mysql_fetch_assoc($res2)) {
+        $linha = $show['img_nome'];
+         unlink("user_data/$linha");
     }
+   
+    $res = mysql_query("DELETE from anuncio WHERE anuncio_id = '$exclui_idSub' AND usuario_usu_id = '$idUser' ")or die(mysql_error());
+    $delFotos = mysql_query("DELETE from img_produto WHERE anuncio_anuncio_id = '$exclui_idSub' ")or die(mysql_error());   
+     if(!mysql_error()){
+        header("Location:../pages/anuncio.php?error=0");
+     }
+     else{
+        header("Location:../pages/anuncio.php?error=1");
 
+     }
+
+
+}
+function deletaImageAnuncio(){//Editar anuncio
+    $exclui_idSub = $_GET['id'];
+    $idImg = $_GET['idImg'];
+    $res2 = mysql_query("SELECT *FROM img_produto WHERE img_id = '$idImg' ")or die(mysql_error());
+    while ($show = mysql_fetch_assoc($res2)) {
+        $linha = $show['img_nome'];
+         unlink("user_data/$linha");
+    }
+   
+    $delFotos = mysql_query("DELETE from img_produto WHERE img_id = '$idImg' ")or die(mysql_error());   
+     if(!mysql_error()){
+        header("Location:../pages/editarAnuncio.php?error=0");
+     }
+     else{
+        header("Location:../pages/editarAnuncio.php?error=1");
+
+     }
+
+
+}
+function editarAnuncio(){
+
+        $id = $_POST['id'];
+        $titulo = $_POST['titulo'];
+        $descricao = $_POST['descricao'];
+        $valor= $_POST['valor'];
+        $data = date("Y-m-d");
+        $estado = $_POST['estado'];
+        $cidade = $_POST['cidade'];
+        $dataFinal = date("Y-m-d", mktime (0,0,0,date("m"),date("d")+10,date("Y")));
+       
+        mysql_query("UPDATE anuncio set 
+                                        anuncio_titulo = '$titulo',
+                                        anuncio_desc = '$descricao',
+                                        anuncio_valor = '$valor',
+                                        anuncio_datainicial = '$data',
+                                        anuncio_datafinal = '$dataFinal',
+                                        anuncio_estado = '$estado',
+                                        anuncio_cidade = '$cidade'
+                                        WHERE anuncio_id = '$id' ")or die(mysql_error());
+
+                                            
+    if(isset($_FILES['files'])){
+        $errors= array();
+       
+        foreach($_FILES['files']['tmp_name'] as $key => $tmp_name ){
+            $file_name = md5(rand(1,999)).$_FILES['files']['name'][$key];
+            $file_size =$_FILES['files']['size'][$key];
+            $file_tmp =$_FILES['files']['tmp_name'][$key];
+            $file_type=$_FILES['files']['type'][$key];
+            if($file_size > 3097152){
+                $errors[]='File size must be less than 3 MB';
+            }       
+            $desired_dir="user_data";
+            if(empty($errors)==true){
+                if(is_dir($desired_dir)==false){
+                    mkdir("$desired_dir", 0700);        // Create directory if it does not exist
+                }
+                if(is_dir("$desired_dir/".$file_name)==false){
+                    move_uploaded_file($file_tmp,"user_data/".$file_name);
+                }else{                                  //rename the file if another one exist
+                    $new_dir="user_data/".$file_name.time();
+                     rename($file_tmp,$new_dir) ;               
+                }
+
+                 
+
+                 
+                 $res = mysql_query("select max(anuncio_id)as maior FROM anuncio")or die(mysql_error());
+                 $most = mysql_fetch_assoc($res);
+                 $maxIdAnuncio = $most['maior'];
+                 mysql_query("INSERT into img_produto(img_nome,
+                                                      img_dir,
+                                                      anuncio_anuncio_id,
+                                                      anuncio_usuario_usu_id)
+                                                      VALUES('$file_name',
+                                                              '$file_type',
+                                                              '$maxIdAnuncio',
+                                                              '$idUser')")or die(mysql_error());
+
+
+                // mysql_query("INSERT INTO fotos(titulo,FILE_NAME,FILE_SIZE,FILE_TYPE,descricao,data) 
+                  //                  VALUES('$titulo','$file_name','$file_size','$file_type','$descricao','$data')")or die(mysql_error());         
+
+            }else{
+                    print_r($errors);
+            }
+            
+        }
+        if(empty($error)){
+            echo "Success";
+           
+            header("Location:../pages/anuncio.php");
+        }
+    }
+    
 }
 ?>
