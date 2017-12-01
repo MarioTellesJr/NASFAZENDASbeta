@@ -58,7 +58,7 @@
   <div class="container">
   
       
-      <form class="form-signin" action="files/Funcoes.php?funcao=13" method="post">
+      <form class="form-signin" action="files/Funcoes.php?funcao=50" method="post">
         <p>
         	<center><img src="../images/logo.png" width="100" /></center>
       	</p>
