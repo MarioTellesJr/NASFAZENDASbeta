@@ -1,6 +1,7 @@
 <?php
   error_reporting(0);
   $erro=$_GET['erro'];
+  include("conexao.php");
   
 ?>
 <html>
@@ -102,9 +103,8 @@
           
         </div>
 
-
         <div class="container" style="">
-          <span style="margin-left:-15px;color:black; font-size: 16px;" class="psw">Esqueceu a <a href="#">Senha?</a></span>
+          <span style="margin-left:-15px;color:black; font-size: 16px;" class="psw">Esqueceu a <a href="recuperar.php">Senha?</a></span>
         </div>
        
       </form>
