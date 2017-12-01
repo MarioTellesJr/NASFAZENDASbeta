@@ -7,6 +7,7 @@
     $show = mysql_fetch_assoc($res);
     $nomePF = $show['pessoaFisica_nome'];
     $id = $show['usu_id'];
+    $idUser = $show['usu_id'];
    // $nomeJUR = $show['pessoa_jur_nomeFantasia'];
 
 
@@ -429,7 +430,7 @@
                                 <a href="editarAnuncio.php?id=<?php echo $id; ?>" data-toggle="modal" title="Editar">
                                 <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
                                 </a>
-                                <a href="delAnuncio.php?id<?php echo $id ?>" data-toggle="modal" data-target=".bd-example-modal-lg" title="Excluir">
+                                <a href="" data-toggle="modal" data-target=".bd-example-modal-lg" title="Excluir">
                                 <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
                                 </a>
                                 <a href="info.php?id=<?php echo $id; ?>" data-toggle="modal" data-target=".bd-info-modal-lg" title="Mais Informações">
@@ -513,13 +514,25 @@
                             <a href="anuncio.php"><button class="btn btn-primary" >Voltar</button></a>
                        <?php 
                             }else{
-                                echo "<small>Nenhum registro encontrado...</small>";
+                                echo "<small>Nenhum registro encontrado...</small><br>";
                                 echo '<a href="anuncio.php"><button class="btn btn-primary" >Voltar</button></a>';
                             }
                         }
 
                          ?>
-
+                <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                          <div class="modal-dialog modal-lg">
+                            <div class="modal-content" style="padding:5px 5px;padding-right:25px;">
+                             <div class="modal-header">
+                              <h2 class="modal-title">Deletar Anúncio</h2>
+                              </div>
+                                <p style="font-size:16px;">Tem certeza que deseja deletar o anúncio? </p>
+                                <a href="../files/Funcoes.php?id=<?php echo $id; ?>&idUser=<?php echo $idUser; ?>&funcao=14" ><button class="btn btn-success">Deletar</button></a>
+                                <a href="" ><button class="btn btn-danger">Cancelar</button></a>
+                               
+                            </div>
+                          </div>
+                        </div><!-- FIM MODAL EXCLUIR -->         
                 </div><!-- /#col-lg12 -->
             </div> <!-- /#row -->
                    

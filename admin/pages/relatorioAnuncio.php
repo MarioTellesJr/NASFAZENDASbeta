@@ -261,7 +261,131 @@
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Relatórios Anúncio</h1>
+                    
+                    <h2>Gerar Relatórios</h2>
+                    <hr>
+                        <form action="" method="post">
+                            <input type="text" class="form-control" name="buscar" placeholder="Titulo,valor,data..." required="required"><br>
+                        <table style="width:100%;text-align:center;">
+                            <tr>
+                           
+
+                            <td><label>Categoria</label></td>
+                            <td>
+                                <select name="Distrito" size="1" width="180" class="COMBODISTCSS form-control" id="COMBOFAB" tabindex="1">
+                                    <option value="0">Escolha uma Categoria</option>
+                                    <?php
+                                        $formCateg = mysql_query("SELECT *FROM categoria ")or die(mysql_error());
+                                        while($mostraCat = mysql_fetch_assoc($formCateg)):
+                                            $ct = $mostraCat['categoria_nome'];
+                                    ?>
+                                    <option value="<?php echo $ct; ?>">Atividade <?php echo $ct; ?></option>
+                                    <?php 
+                                        endwhile;
+                                        ?>
+                                </select>
+                            </td>
+                            <td><label>SubCategoria</label></td>
+                                <td>
+                                    <select name="Concelho" size="1" width="195" class="COMBOCONCCSS form-control" id="COMBOCID" tabindex="1">
+                                        <option data-distrito="0" value="0">Escolha uma subcategoria</option>
+                                        <option data-distrito="interna" value="Negociação">Negociação</option>
+                                        <option data-distrito="interna" value="Atualizar cadastro SGE">Atualizar Cadastros SGE</option>
+                                        <option data-distrito="interna" value="Organizar documentos">Organizar Documentos</option>
+                                        <option data-distrito="interna" value="Pós vendas">Pós vendas</option>
+                                        <option data-distrito="interna" value="Contato com cliente">Contato Cliente</option>
+                                       
+                                        <option data-distrito="externa" value="Distribuição de materiais">Distribuições de Materiais</option>
+                                        <option data-distrito="externa" value="Visita em empresa">Visitas Empresas</option>
+                                        <option data-distrito="externa" value="Viagens">Viagens</option>
+                                        
+                                        <option data-distrito="estrategia" value="Participação em evento">Participação em Evento</option>
+                                        <option data-distrito="estrategia" value="Campanha publicitária">Campanha Publicitaria</option>
+                                        <option data-distrito="estrategia" value="Ações sazonais">Ações Sazonais</option>
+                                    
+                                    </select>
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td><label>Data Início</label></td>
+                                <td><input type="date" name="start"  required class="form-control"/></td>
+                                <td><label>Data Final</label></td>
+                                <td><input type="date" name="end"  required class="form-control"/></td>
+                               
+                                
+                            </tr>
+                            
+                        </table>
+                            <button type="submit" value="buscar" class="btn btn-success">Buscar</button>
+                        </form>
+                        <?php
+                            if(isset($_POST['buscar'])){
+                        ?>
+                        <hr>
+                        <h2>Relatório</h2>
+                        <hr>
+                        <table class="table table-bordered" style="font-size:13px;">
+                        <tr>
+                            <th style="text-align:center;">#id</th>
+                            <th style="text-align:center;">Titulo</th>
+                            <th style="text-align:center;">Descrição</th>
+                            <th style="text-align:center;">Preço</th>
+                            <th style="text-align:center;" >Data Postagem</th>
+                            <th style="text-align:center;">Data Expira</th>
+                            <th style="text-align:center;">Status</th>
+                            <th style="text-align:center;">Total Imagens</th>
+                            <th style="text-align:center;">Ação</th>
+                        </tr>
+                        <?php 
+
+                            $res =mysql_query("SELECT *FROM anuncio ORDER BY anuncio_id DESC LIMIT 10")or die(mysql_error());
+                            while($mostrar = mysql_fetch_assoc($res)):
+                                $id = $mostrar['anuncio_id'];
+                                $titulo = $mostrar['anuncio_titulo'];
+                                $desc = $mostrar['anuncio_desc'];
+                                $valor = $mostrar['anuncio_valor'];
+                                $data = $mostrar['anuncio_datainicial'];
+                                $data = date('d-m-Y', strtotime($data));
+                                $dataFinal = $mostrar['anuncio_datafinal'];
+                                $dataFinal = date('d-m-Y', strtotime($dataFinal));
+                                $forma = $mostrar['anuncio_formPag'];
+
+                                $resImg = mysql_query("SELECT COUNT(*) as total FROM img_produto WHERE anuncio_anuncio_id = '$id'")or die(mysql_error());
+                                $mostrarImg = mysql_fetch_assoc($resImg);
+                                $totalImg = $mostrarImg['total'];
+
+
+                        ?>
+                         <tr>
+                            <th > <?php echo $id ?> </th>
+                            <th > <?php echo $titulo ?> </th>
+                            <th > <?php echo $desc; ?> </th>
+                            <th > <?php echo $valor;  ?> </th> 
+                            <th > <?php echo $data; ?> </th>
+                            <th > <?php echo $dataFinal; ?> </th>
+                            <th > <?php echo $forma; ?> </th>
+                            <th > <?php echo "Imagens ( " .$totalImg." )"; ?> </th>
+                            <th style="text-align:center;">
+                                <a href="editarAnuncio.php?id=<?php echo $id; ?>" data-toggle="modal" title="PDF">
+                                <span class="glyphicon glyphicon-save-file" aria-hidden="true"></span>
+                                </a>
+                               
+                               
+                            </th>
+                        </tr>
+                   
+                        <?php 
+                            endwhile;
+                        }else{
+                         ?>
+                            <small>Realize uma consulta primeiro!</small>
+                        
+                        <?php }
+
+                        ?>
+                    </fieldset>
+                    </form>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>

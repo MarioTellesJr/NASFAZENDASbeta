@@ -273,7 +273,7 @@
                   
                                 <h4 class="modal-title">Editar Anúncio</h4>
                               
-                         <form action="../files/Funcoes.php?funcao=19&id=<?php echo $id; ?>" method="post" enctype="multipart/form-data">
+                         <form action="../files/Funcoes.php?funcao=20&id=<?php echo $id; ?>" method="post" enctype="multipart/form-data">
                             <?php
                                 $id = $_GET['id']; 
                                 $res = mysql_query("SELECT *from anuncio WHERE anuncio_id = '$id' ")or die(mysql_error()); 
@@ -283,7 +283,7 @@
                                 $valor = $show['anuncio_valor'];
                                 $dataInicial = $show['anuncio_datainicial'];
                                 $dataFinal = $show['anuncio_datafinal'];
-                                $categoria = $show['anuncio_categoria'];
+                                //$categoria = $show['anuncio_categoria'];
                                 $estado = $show['anuncio_estado'];
                                 $cidade = $show['anuncio_cidade'];
 
@@ -292,8 +292,16 @@
                             <input type="text" name="titulo" value="<?php echo $titulo ?>" class="form-control"/>
                             <label>Descrição</label>
                             <textarea name="descricao"  class="form-control"><?php echo $desc ?></textarea>
-                            <label>Valor</label>
-                            <input type="number" min="0" step="0.01"  value="<?php echo $valor ?>" data-number-to-fixed="2" data-number-stepfactor ="100" class="form-control currency" name="valor" placeholder="R$ Valor do produto">
+                            <div class="form-group">
+                                <label>Valor</label> <br>
+                                <label class="sr-only" for="exampleInputAmount">Valor (in real)</label>
+                                <div class="input-group">
+
+                                  <div class="input-group-addon">$</div>
+                                  <input type="text" class="form-control" name="valor" value="<?php echo $valor ?>" id="exampleInputAmount" placeholder="Valor">
+                                  <div class="input-group-addon">.00</div>
+                                </div>
+                            </div>
                             <label>Categoria</label>
                             <select name="categoria" class="form-control">
                                 <option>Escolha uma categoria</option>
@@ -308,16 +316,23 @@
                                 ?>
                             </select>
                              <label>Escolha foto</label>
+                              <center><input type="file"  name="files[]" id="imageURL" multiple /></center>
                             <div style="width:98%;height:150px;background-color: #f6f7f8;padding:10px 10px;margin:10px 10px;border:2px dashed #ccc; display:table;">
-                                <br><br>
+                                <br>
+
                                 <?php 
                                     $fotos = mysql_query("SELECT *from img_produto WHERE anuncio_anuncio_id = '$id' ")or die(mysql_error());
                                     while($mostrar=mysql_fetch_assoc($fotos)){ 
                                         $img = $mostrar['img_nome'];
+                                        $idImg = $mostrar['img_id'];
                                         
                                     ?>
-                                    <img src="../files/user_data/<?php echo $img ?>"  width="200" />
+                                    <div style="width:205px;height: 155px;border:2px solid #ccc;float:left;">
+                                        <a style="position:absolute;" href="../files/Funcoes.php?id=<?php echo $id ?>&idImg=<?php echo $idImg ?>&funcao=14" >[x]</a>
+                                        <img src="../files/user_data/<?php echo $img ?>"  width="200" height="150" />
+                                    </div>
                                     <?php } ?> 
+                                    
                             </div>
                             <label>Estado</label>
                             <select name="estado" class="form-control">
@@ -325,9 +340,9 @@
                                 <?php 
                                     $res = mysql_query("SELECT * from tb_estados")or die(mysql_error());
                                     while ($mostrar=mysql_fetch_assoc($res)) { 
-                                        $cidade= $mostrar['nome'];
+                                        $estado= $mostrar['nome'];
                                     ?>
-                                        <option value="<?php echo $cidade?>"><?php echo $cidade; ?></option>
+                                        <option value="<?php echo $estado?>"><?php echo $estado; ?></option>
                                   <?php      
                                     }
                                 ?>
